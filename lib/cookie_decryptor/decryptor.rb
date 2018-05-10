@@ -39,7 +39,7 @@ module CookieDecryptor
     end
 
     def encryptor
-      secret = @key_generator.generate_key("encrypted cookie")
+      secret = @key_generator.generate_key("encrypted cookie")[0, ActiveSupport::MessageEncryptor.key_len]
       sign_secret = @key_generator.generate_key("signed encrypted cookie")
       ActiveSupport::MessageEncryptor.new(
         secret,
